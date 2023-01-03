@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+model Account {
+  id           String  @id @default(uuid())
+  alias_id     String  @unique
+  name         String
+  avatar_url   String?
+  email        String  @unique
+  cpf          String  @unique
+  phone_number String
+  password     String
+
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @default(now()) @updatedAt
+  AccountAddress AccountAddress?
+  AccountProfile AccountProfile?
+
+  @@map("accounts")
+}
+
+model AccountAddress {
+  id         String  @id
+  alias_id   String  @unique
+  zip_code   String
+  country    String
+  state      String
+  city       String
+  street     String
+  complement String
+  account    Account @relation(fields: [account_id], references: [id])
+  account_id String  @unique
+
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @default(now()) @updatedAt
+  AccountProfile AccountProfile?
+
+  @@map("account_addresses")
+}
+
+enum AccountEcommerceExperience {
+  BEGINNER
+  SOME_KNOWLEDGE
+  EXPERT
+}
+
+enum AccountType {
+  CUSTOMER_AND_SELLER
+  ONLY_CUSTOMER
+  ONLY_SELLER
+}
+
+model AccountProfile {
+  id       String @id
+  alias_id String @unique
+
+  account_type            AccountType
+  account_ecom_experience AccountEcommerceExperience
+  account                 Account                    @relation(fields: [account_id], references: [id])
+  account_address         AccountAddress             @relation(fields: [account_address_id], references: [id])
+  account_id              String                     @unique
+  account_address_id      String                     @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@unique([account_id, account_address_id])
+  @@map("account_profiles")
+}
