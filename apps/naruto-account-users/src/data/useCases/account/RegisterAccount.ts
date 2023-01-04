@@ -42,6 +42,7 @@ export default class RegisterAccount implements IRegisterAccount {
       cpf,
       email,
       phone_number,
+      is_active: true,
       password: hashedPassword,
     })
 

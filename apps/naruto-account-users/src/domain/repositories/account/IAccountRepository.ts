@@ -1,11 +1,11 @@
 import Account from '@domain/models/account/Account'
 import ICreateAccountDTO from '@domain/repositories/account/dtos/ICreateAccountDTO'
-import ILoadAccountByEmailResponse from './dtos/ILoadAccountByEmailResponse'
+import IUpdateAccountDTO from '@domain/repositories/account/dtos/IUpdateAccountDTO'
 
 export default interface IAccountRepository {
-  create(account: ICreateAccountDTO): Promise<Account>
+  create(data: ICreateAccountDTO): Promise<Account>
+  findByAliasId(alias_id: string): Promise<Account>
   exists(email: string): Promise<boolean>
   findByEmail(email: string): Promise<Account>
-  loadByEmail(email: string): Promise<ILoadAccountByEmailResponse>
-  update(account: Account): Promise<void>
+  update(data: IUpdateAccountDTO): Promise<Account>
 }

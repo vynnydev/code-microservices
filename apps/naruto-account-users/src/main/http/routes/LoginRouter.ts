@@ -7,7 +7,7 @@ import loginControllerFactory from '@main/http/factories/controllers/LoginContro
 const router = Router();
 
 router
-  .route('/signup')
+  .route('/login')
   .post(routeAdapter(loginControllerFactory.makeLoginController()))
 
 export default { router }

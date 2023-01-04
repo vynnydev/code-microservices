@@ -3,7 +3,6 @@ import { IValidation } from "@presentation/protocols/IValidation"
 import IPresenter from "@presentation/protocols/IPresenter"
 
 import IRegisterAccount from "@domain/useCases/account/IRegisterAccount"
-import IAuthentication from "@domain/useCases/account/IAuthentication"
 import { IPublishAccountHandler } from "@infra/external/kafka/protocols/IPublishAccountHandler"
 
 import { clientError, conflict, IHttpRequest, IHttpResponse } from "@presentation/protocols/IHttp"
@@ -24,7 +23,6 @@ export default class SignUpController implements IController {
     private readonly validation: IValidation,
     private readonly registerAccount: IRegisterAccount,
     private readonly kafkaPublishAccountHandler: IPublishAccountHandler,
-    private readonly authentication: IAuthentication,
     private readonly presenter: IPresenter,
   ) {}
 
@@ -77,12 +75,7 @@ export default class SignUpController implements IController {
           }
         })
   
-        const authentication = await this.authentication.authenticate({
-          email,
-          password,
-        })
-        
-        return this.presenter.reply({ data: { account: authentication } })
+        return this.presenter.reply({ data: { account: createdAccount } })
       }
     } catch (err) {
       return fail(err)

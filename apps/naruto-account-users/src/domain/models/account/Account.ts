@@ -15,6 +15,8 @@ export default class Account {
   
   password: string;
 
+  is_active: boolean;
+
   created_at: Date;
   
   updated_at: Date;

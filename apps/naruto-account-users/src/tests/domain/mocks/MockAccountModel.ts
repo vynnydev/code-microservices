@@ -14,6 +14,7 @@ const mock = (data?: IMockAccountModelDTO): Account => {
     avatar_url: String(faker.internet.url()),
     cpf: String(faker.datatype.number()),
     password: String(faker.internet.password()),
+    is_active: faker.datatype.boolean(), 
     created_at: faker.date.recent(),
     updated_at: faker.date.recent(),
     ...data,

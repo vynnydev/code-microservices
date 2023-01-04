@@ -28,6 +28,7 @@ describe('SignUpPresenter', () => {
         cpf: account.cpf,
         phone_number: account.phone_number,
         password: account.password,
+        is_active: account.is_active,
         created_at: account.created_at,
         updated_at: account.updated_at,
       },

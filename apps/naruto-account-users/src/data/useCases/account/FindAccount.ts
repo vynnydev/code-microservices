@@ -1,18 +1,20 @@
-import AppError from "@utils/errors/AppError";
-
-import Account from "@domain/models/account/Account";
 import IAccountRepository from "@domain/repositories/account/IAccountRepository";
 import IFindAccountByEmail from "@domain/useCases/account/IFindAccount";
+import { TFindAccountResponse } from "@domain/useCases/account/dtos/TFindAccountResponse";
+
+import { InvalidAliasIdOrAccountIsNotActiveError } 
+  from "@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError";
+import { left, right } from "@utils/helpers/Either";
 
 export default class FindAccount implements IFindAccountByEmail {
   constructor(private readonly accountRepository: IAccountRepository) {}
 
-  public async find(email: string): Promise<Account> {
-    const account = await this.accountRepository.findByEmail(email)
+  public async find(account_alias_id: string): Promise<TFindAccountResponse> {
+    const foundAccount = await this.accountRepository.findByAliasId(account_alias_id)
 
-    if (!account)
-      throw new AppError({ message: 'Account does not exists', status_code: 400 })
+    if (!foundAccount || !foundAccount.is_active) 
+      return left(new InvalidAliasIdOrAccountIsNotActiveError())
 
-    return account
+    return right(foundAccount)
   }
 }

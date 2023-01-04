@@ -2,19 +2,32 @@ import { prisma } from '@infra/external/prisma/client'
 
 import IAccountRepository from "@domain/repositories/account/IAccountRepository"
 import Account from "@domain/models/account/Account"
-import ILoadAccountByEmailResponse from '@domain/repositories/account/dtos/ILoadAccountByEmailResponse'
 
-import AccountMapper from '@presentation/mappers/AccountMapper'
+import IUpdateAccountDTO from '@domain/repositories/account/dtos/IUpdateAccountDTO'
+
+import accountMapper from '@presentation/mappers/AccountMapper'
 
 export default class PrismaOrmAccountRepository implements IAccountRepository {
   async create(account: Account): Promise<Account> {
-    const data = AccountMapper.toPersistence(account)
+    const data = accountMapper.toPersistence(account)
 
     const createdAccount = await prisma.account.create({ 
       data
     })
 
     return createdAccount
+  }
+
+  async findByAliasId(alias_id: string): Promise<Account> {
+    const foundAccount = await prisma.account.findUnique({
+      where: { alias_id }
+    })
+
+    if (!foundAccount) {
+      return null
+    }
+
+    return foundAccount
   }
 
   async exists(email: string): Promise<boolean> {
@@ -26,31 +39,25 @@ export default class PrismaOrmAccountRepository implements IAccountRepository {
   }
 
   async findByEmail(email: string): Promise<Account> {
-    const account = await prisma.account.findUnique({
+    const foundAccount = await prisma.account.findUnique({
       where: { email },
     })
 
-    if (!account) {
+    if (!foundAccount) {
       return null
     }
 
-    return account
+    return foundAccount
   }
 
-  async loadByEmail(email: string): Promise<ILoadAccountByEmailResponse> {
-    const foundAccountByEmail = await prisma.account.findUnique({ where: { email }})
-
-    return foundAccountByEmail
-  }
-
-  async update(account: Account): Promise<void> {
-    const data = account
-
-    await prisma.account.update({
+  async update({ id, data }: IUpdateAccountDTO): Promise<Account> {
+    const updatedAccount = await prisma.account.update({
       where: {
-        id: account.id,
+        id,
       },
       data
     })
+
+    return updatedAccount
   }
 }

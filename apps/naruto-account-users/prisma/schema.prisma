@@ -24,6 +24,7 @@ model Account {
   cpf          String  @unique
   phone_number String
   password     String
+  is_active    Boolean
 
   created_at     DateTime        @default(now())
   updated_at     DateTime        @default(now()) @updatedAt
@@ -34,7 +35,7 @@ model Account {
 }
 
 model AccountAddress {
-  id         String  @id
+  id         String  @id @default(uuid())
   alias_id   String  @unique
   zip_code   String
   country    String
@@ -65,7 +66,7 @@ enum AccountType {
 }
 
 model AccountProfile {
-  id       String @id
+  id       String @id @default(uuid())
   alias_id String @unique
 
   account_type            AccountType

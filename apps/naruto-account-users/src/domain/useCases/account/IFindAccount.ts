@@ -1,5 +1,5 @@
-import Account from "@domain/models/account/Account";
+import { TFindAccountResponse } from "./dtos/TFindAccountResponse";
 
 export default interface IFindAccount {
-  find(email: string): Promise<Account>
+  find(email: string): Promise<TFindAccountResponse>
 }

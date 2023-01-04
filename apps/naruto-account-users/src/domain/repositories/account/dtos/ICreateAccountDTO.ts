@@ -6,4 +6,5 @@ export default interface ICreateAccountDTO {
   email: string,
   phone_number: string,
   password: string,
+  is_active: boolean,
 }
