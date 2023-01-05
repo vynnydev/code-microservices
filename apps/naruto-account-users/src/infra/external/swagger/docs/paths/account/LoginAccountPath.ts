@@ -25,16 +25,16 @@ export const loginAccountPath = {
         }
       },
       400: {
-        $ref: '#/components/badRequest'
+        $ref: '#/helpers/badRequest'
       },
       401: {
-        $ref: '#/components/unauthorized'
+        $ref: '#/helpers/unauthorized'
       },
       404: {
-        $ref: '#/components/notFound'
+        $ref: '#/helpers/notFound'
       },
       500: {
-        $ref: '#/components/serverError'
+        $ref: '#/helpers/serverError'
       }
     }
   }

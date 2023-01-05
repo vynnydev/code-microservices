@@ -26,10 +26,10 @@ export const updateAccountResponseSchema = {
       type: 'boolean'
     },
     created_at: {
-      type: 'string'
+      type: 'Date'
     },
     updated_at: {
-      type: 'string'
+      type: 'Date'
     }
   },
   required: [

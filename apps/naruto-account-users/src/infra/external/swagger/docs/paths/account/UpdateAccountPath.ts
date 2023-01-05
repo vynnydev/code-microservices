@@ -28,16 +28,16 @@ export const updateAccountPath = {
         }
       },
       400: {
-        $ref: '#/components/badRequest'
+        $ref: '#/helpers/badRequest'
       },
       403: {
-        $ref: '#/components/forbidden'
+        $ref: '#/helpers/forbidden'
       },
       404: {
-        $ref: '#/components/notFound'
+        $ref: '#/helpers/notFound'
       },
       500: {
-        $ref: '#/components/serverError'
+        $ref: '#/helpers/serverError'
       }
     }
   }

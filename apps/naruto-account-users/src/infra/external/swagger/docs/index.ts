@@ -1,12 +1,13 @@
 import paths from './paths'
-import components from './components'
+import helpers from './helpers'
 import schemas from './schemas'
+import components from './components'
 
 export default {
   openapi: '3.0.0',
   info: {
     title: 'ShinobiCode | Microservice (naruto-account-users) - Clean Node Microservices',
-    description: 'Clean Node Microservices for E-commerce and FinTech',
+    description: 'Accounts Microservices for E-commerce and FinTech',
     version: '1.0.0',
     contact: {
       name: 'Vinicius Prudencio',
@@ -32,5 +33,6 @@ export default {
   }],
   paths,
   schemas,
-  components,
+  helpers,
+  components
 }

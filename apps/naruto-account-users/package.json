@@ -13,7 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "make:usecase": "plop --plopfile ./.plop/usecase.ts",
-    "build": "babel src --extensions \".ts\" --out-dir dist --copy-files"
+    "build": "babel src --extensions \".ts\" --out-dir dist --copy-files",
+    "check": "npm-check -s -u"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
