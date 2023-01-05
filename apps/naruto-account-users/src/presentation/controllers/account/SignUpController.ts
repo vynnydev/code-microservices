@@ -8,16 +8,6 @@ import { IPublishAccountHandler } from "@infra/external/kafka/protocols/IPublish
 import { clientError, conflict, IHttpRequest, IHttpResponse } from "@presentation/protocols/IHttp"
 import { AccountAlreadyExistsError } from "@utils/errors/domain/useCases/AccountAlreadyExistsError"
 
-type SignUpControllerRequest = {
-  name: string
-  email: string
-  cpf: string
-  avatar_url: string
-  phone_number: string
-  password: string
-  password_confirmation: string
-}
-
 export default class SignUpController implements IController {
   constructor(
     private readonly validation: IValidation,
@@ -26,7 +16,7 @@ export default class SignUpController implements IController {
     private readonly presenter: IPresenter,
   ) {}
 
-  async handle(body: SignUpControllerRequest): Promise<IHttpResponse> {
+  async handle({ body }: IHttpRequest): Promise<IHttpResponse> {
     try {
       const validationResult = this.validation.validate(body)
 
@@ -61,6 +51,7 @@ export default class SignUpController implements IController {
         }
       } else {
         await this.kafkaPublishAccountHandler.handle({
+          topic: 'accounts.new-account',
           account: {
             id: createdAccount.value.id,
             alias_id: createdAccount.value.alias_id,
@@ -80,6 +71,5 @@ export default class SignUpController implements IController {
     } catch (err) {
       return fail(err)
     }
-
   }
 }

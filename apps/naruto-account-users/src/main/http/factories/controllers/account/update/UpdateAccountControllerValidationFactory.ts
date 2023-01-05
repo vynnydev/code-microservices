@@ -6,7 +6,7 @@ import emailValidationFactory from '@main/http/factories/validators/EmailValidat
 import phoneNumberValidationFactory from '@main/http/factories/validators/PhoneNumberValidationFactory'
 import passwordValidationFactory from '@main/http/factories/validators/PasswordValidationFactory'
 
-const makeSignUpValidation = (): ValidationComposite => {
+export const makeUpdateAccountValidation = (): ValidationComposite => {
   const nameValidation = nameValidationFactory.makeNameValidation()
   const cpfValidation = cpfValidationFactory.makeCpfValidation()
   const emailValidation = emailValidationFactory.makeEmailValidation()
@@ -23,7 +23,5 @@ const makeSignUpValidation = (): ValidationComposite => {
 
   const validationComposite = new ValidationComposite(validations)
 
-  return validationComposite;
-};
-
-export default { makeSignUpValidation }
+  return validationComposite
+}

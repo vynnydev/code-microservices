@@ -1,8 +1,8 @@
-import { IPublishAccountHandler } from "../protocols/IPublishAccountHandler";
+import { IPublishAccountHandler } from "../../protocols/IPublishAccountHandler";
 
-import kafkaMessagingHandlerAdapterFactory from "./adapters/KafkaHandlerAdapterFactory";
+import kafkaMessagingHandlerAdapterFactory from "../adapters/KafkaHandlerAdapterFactory";
 
-import PublishAccountHandler from '@infra/external/kafka/handlers/PublishAccountHandler'
+import PublishAccountHandler from '@infra/external/kafka/handlers/account/PublishAccountHandler'
 
 export const makePublishAccountHandler = (): IPublishAccountHandler => {
   const kafkaMessagingHandlerAdapter = 
@@ -14,5 +14,3 @@ export const makePublishAccountHandler = (): IPublishAccountHandler => {
 
   return publishAccountHandler
 }
-
-export default { makePublishAccountHandler }

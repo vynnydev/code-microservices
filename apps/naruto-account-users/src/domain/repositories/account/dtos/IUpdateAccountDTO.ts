@@ -4,7 +4,8 @@ interface IUpdateAccount {
   cpf?: string,
   phone_number?: string,
   password?: string,
-  is_active?: boolean
+  avatar_url?: string,
+  is_active?: boolean,
 }
 
 export default interface IUpdateAccountDTO {

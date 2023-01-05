@@ -14,6 +14,7 @@ export class InMemoryAccountRepository implements IAccountRepository {
     cpf,
     email,
     password,
+    is_active,
     phone_number,
   }: ICreateAccountDTO): Promise<Account> {
     const createAccount = {
@@ -45,18 +46,6 @@ export class InMemoryAccountRepository implements IAccountRepository {
 
   async findByEmail(email: string): Promise<Account> {
     return this.items.find(account => account.email === email)
-  }
-
-  async updateAccessToken(id: string, token: string): Promise<void> {
-    const foundIndex = this.items.findIndex(account => account.id === id)
-
-    if (foundIndex < 0) return undefined
-
-    const foundAccount = this.items[foundIndex]
-
-    Object.assign(foundAccount, token)
-
-    this.items[foundIndex] = foundAccount
   }
 
   async update({ id, data }: IUpdateAccountDTO): Promise<Account> {

@@ -2,12 +2,13 @@ import { Request, Response } from 'express'
 
 import { IController } from '@presentation/protocols/IController'
 
-const routeAdapter = (controller: IController) => {
+const adaptRouter = (controller: IController) => {
   return async (request: Request, response: Response) => {
     const requestData = {
-      ...request.body,
-      ...request.params,
-      ...request.query,
+      body: request.body,
+      headers: request.headers,
+      params: request.params,
+      query: request.query,
     }
 
     const httpResponse = await controller.handle(requestData)
@@ -22,4 +23,4 @@ const routeAdapter = (controller: IController) => {
   }
 }
 
-export { routeAdapter };
+export { adaptRouter };

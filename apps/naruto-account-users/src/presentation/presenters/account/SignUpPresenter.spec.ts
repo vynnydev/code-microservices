@@ -16,7 +16,7 @@ describe('SignUpPresenter', () => {
       data: { account },
     });
 
-    expect(httpResponse.status_code).toBe(200);
+    expect(httpResponse.status_code).toBe(201);
     expect(httpResponse.body).toEqual({
       status: 'success',
       account: {

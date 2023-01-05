@@ -21,11 +21,11 @@ export default class UpdateAccount implements IUpdateAccount {
     if (!foundAccount || !foundAccount.is_active) 
       return left(new InvalidAliasIdOrAccountIsNotActiveError())
 
-    const { name, email, cpf, phone_number, password } = data
+    const { name, email, cpf, phone_number, avatar_url, password } = data
 
     const updatedAccount = await this.accountRepository.update({
       id: foundAccount.id,
-      data: { name, email, cpf, phone_number, password }
+      data: { name, email, cpf, avatar_url, phone_number, password }
     })
 
     if (!updatedAccount) 

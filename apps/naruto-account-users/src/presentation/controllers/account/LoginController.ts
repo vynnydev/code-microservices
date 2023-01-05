@@ -3,13 +3,8 @@ import { IValidation } from "@presentation/protocols/IValidation"
 
 import IAuthentication from "@domain/useCases/account/IAuthentication"
 
-import { clientError, forbidden, IHttpResponse, success } from "@presentation/protocols/IHttp"
+import { clientError, forbidden, IHttpRequest, IHttpResponse, success } from "@presentation/protocols/IHttp"
 import { InvalidEmailOrPasswordError } from "@utils/errors/domain/useCases/InvalidEmailOrPasswordError"
-
-type LoginControllerRequest = {
-  email: string
-  password: string
-}
 
 export default class LoginController implements IController {
   constructor(
@@ -17,13 +12,13 @@ export default class LoginController implements IController {
     private readonly authentication: IAuthentication,
   ) {}
 
-  async handle(request: LoginControllerRequest): Promise<IHttpResponse> {
+  async handle({ body }: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const validationResult = this.validation.validate(request)
+      const validationResult = this.validation.validate(body)
 
       if (validationResult.isLeft()) return clientError(validationResult.value)
 
-      const { email, password } = request
+      const { email, password } = body
 
       const auth = await this.authentication.authenticate({
         email,
@@ -39,7 +34,6 @@ export default class LoginController implements IController {
           default: 
             return clientError(error)
         }
-
       } else {
         const { token } = auth.value
 

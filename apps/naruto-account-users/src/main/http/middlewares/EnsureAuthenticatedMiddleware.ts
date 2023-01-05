@@ -3,11 +3,7 @@ import { decode } from 'jsonwebtoken'
 import { IMiddleware } from '@presentation/protocols/IMiddleware'
 
 import { AccessDeniedError } from '../errors/AccessDeniedError'
-import { forbidden, IHttpResponse, success } from '@presentation/protocols/IHttp'
-
-type EnsureAuthenticatedMiddlewareRequest = {
-  accessToken: string
-}
+import { forbidden, IHttpRequest, IHttpResponse, success } from '@presentation/protocols/IHttp'
 
 type DecodedJwt = {
   sub: string
@@ -17,16 +13,16 @@ export class EnsureAuthenticatedMiddleware implements IMiddleware {
   constructor() {}
 
   async handle(
-    request: EnsureAuthenticatedMiddlewareRequest
+    { headers }: IHttpRequest
   ): Promise<IHttpResponse> {
     try {
-      const { accessToken } = request
+      const { access_token } = headers
 
-      if (accessToken) {
+      if (access_token) {
         try {
-          const decoded = decode(accessToken) as DecodedJwt
+          const decoded = decode(access_token) as DecodedJwt
 
-          return success({ user_id: decoded.sub })
+          return success({ account_id: decoded.sub })
         } catch (err) {
           return forbidden(new AccessDeniedError())
         }
@@ -41,6 +37,6 @@ export class EnsureAuthenticatedMiddleware implements IMiddleware {
 
 export namespace AuthMiddleware {
   export type Request = {
-    accessToken?: string
+    access_token?: string
   }
 }

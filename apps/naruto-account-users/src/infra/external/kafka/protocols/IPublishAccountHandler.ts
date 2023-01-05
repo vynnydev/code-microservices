@@ -1,4 +1,5 @@
 export type TPublishAccountHandlerRequest = {
+  topic: string,
   account: {
     id: string,
     alias_id: string,

@@ -1,11 +1,9 @@
-import IPresenter from '@presentation/protocols/IPresenter';
+import IPresenter from '@presentation/protocols/IPresenter'
 
-import SignUpPresenter from '@presentation/presenters/account/SignUpPresenter';
+import SignUpPresenter from '@presentation/presenters/account/SignUpPresenter'
 
-const makeSignUpPresenter = (): IPresenter => {
-  const registerAccountPresenter = new SignUpPresenter();
+export const makeSignUpPresenter = (): IPresenter => {
+  const signupAccountPresenter = new SignUpPresenter()
 
-  return registerAccountPresenter;
-};
-
-export default { makeSignUpPresenter };
+  return signupAccountPresenter
+}

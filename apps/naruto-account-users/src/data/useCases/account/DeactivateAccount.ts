@@ -19,7 +19,7 @@ export default class DeactivateAccount implements IDeactivateAccount {
 
     const updatedAccount = await this.accountRepository.update({
       id: foundAccount.id,
-      data: { is_active: true }
+      data: { is_active: false }
     })
 
     if (!updatedAccount) 

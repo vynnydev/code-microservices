@@ -2,6 +2,7 @@ interface IUpdateAccount {
   cpf: string,
   email: string,
   name: string,
+  avatar_url: string,
   phone_number: string,
   password: string,
 }

@@ -14,11 +14,13 @@ export default class KafkaMessagingHandlerAdapter implements IKafkaMessagingAdap
       waitForLeaders: true,
       topics: [
         { topic: 'accounts.new-account' },
+        { topic: 'accounts.change-account' },
+        { topic: 'accounts.deactivate-account' },
       ],
     })
 
     await producer.send({
-      topic: 'accounts.new-account',
+      topic,
       messages: [
         { value: JSON.stringify(message) }
       ]

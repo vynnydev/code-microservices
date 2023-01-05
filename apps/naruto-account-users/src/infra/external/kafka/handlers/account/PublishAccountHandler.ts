@@ -1,13 +1,13 @@
 import IKafkaMessagingAdapter from "@presentation/protocols/IKafkaMessagingAdapter";
-import { IPublishAccountHandler, TPublishAccountHandlerRequest } from "../protocols/IPublishAccountHandler";
+import { IPublishAccountHandler, TPublishAccountHandlerRequest } from "../../protocols/IPublishAccountHandler";
 
 export default class PublishAccountHandler implements IPublishAccountHandler {
   constructor(
     private readonly messagingAdapter: IKafkaMessagingAdapter
   ) {}
 
-  async handle({ account }: TPublishAccountHandlerRequest): Promise<void> {
-    await this.messagingAdapter.sendMessage('accounts.new-account', {
+  async handle({ topic, account }: TPublishAccountHandlerRequest): Promise<void> {
+    await this.messagingAdapter.sendMessage(topic, {
       account: {
         id: account.id,
         name: account.name,

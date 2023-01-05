@@ -2,10 +2,10 @@ import { Request, Response, NextFunction } from 'express'
 
 import { IMiddleware } from '@presentation/protocols/IMiddleware'
 
-export const middlewareAdapter = (middleware: IMiddleware) => {
+export const adaptMiddleware = (middleware: IMiddleware) => {
   return async (request: Request, response: Response, next: NextFunction) => {
     const requestData = {
-      accessToken: request.headers?.['x-access-token'],
+      access_token: request.headers?.['x-access-token'],
       ...(request.headers || {}),
     }
 

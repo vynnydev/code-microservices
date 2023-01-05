@@ -15,19 +15,22 @@
     "make:usecase": "plop --plopfile ./.plop/usecase.ts",
     "build": "babel src --extensions \".ts\" --out-dir dist --copy-files"
   },
-
-
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@prisma/client": "^4.7.1",
+    "apollo-server": "^3.11.1",
+    "apollo-server-express": "^3.11.1",
     "awesome-phonenumber": "^2.40.0",
     "aws-sdk": "2.978.0",
     "bcryptjs": "^2.4.3",
     "bullmq": "1.40.4",
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-flow": "^3.2.0",
     "express": "4.17.1",
+    "graphql": "^16.6.0",
+    "graphql-scalars": "^1.20.1",
     "html-to-text": "8.0.0",
     "inline-css": "^3.0.0",
     "ioredis": "4.28.0",
@@ -36,8 +39,10 @@
     "kafkajs": "^1.15.0",
     "nodemailer": "6.7.0",
     "rand-token": "^1.0.1",
+    "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "sns-validator": "^0.3.4",
+    "type-graphql": "^1.1.1",
     "uuid": "8.3.2"
   },
   "devDependencies": {
