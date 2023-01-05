@@ -5,7 +5,7 @@ export default gql`
     signUp (
       name: String!, 
       avatar_url: String, 
-      email: string!, 
+      email: String!, 
       cpf: String!, 
       phone_number: String!, 
       password: String!, 
@@ -18,7 +18,7 @@ export default gql`
     alias_id: String!,
     name: String!, 
     avatar_url: String, 
-    email: string!, 
+    email: String!, 
     cpf: String!, 
     phone_number: String!, 
     password: String!,

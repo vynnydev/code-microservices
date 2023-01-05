@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express'
 
 export default gql`
-  extend type Mutation {
+  extend type Query {
     findAccount (account_alias_id: String!): Account! @auth
   }
 
@@ -10,7 +10,7 @@ export default gql`
     alias_id: String!,
     name: String!, 
     avatar_url: String, 
-    email: string!, 
+    email: String!, 
     cpf: String!, 
     phone_number: String!, 
     password: String!,
