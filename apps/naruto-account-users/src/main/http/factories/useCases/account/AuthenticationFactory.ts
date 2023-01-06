@@ -1,4 +1,4 @@
-import env from '@main/config/env'
+import env from '@main/config/environment'
 import BcryptAdapter from "@infra/adapters/cryptography/BcryptAdapter"
 
 import IAuthentication from "@domain/useCases/account/IAuthentication"

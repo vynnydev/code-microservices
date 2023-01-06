@@ -8,13 +8,13 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=docker:account_users,docker:dbtest
+      - POSTGRES_MULTIPLE_DATABASES=docker:micro_accounts,docker:dbtest
       - POSTGRESQL_PASSWORD=docker
     volumes:
       - ./docker/dbdata:/var/lib/postgresql/data
       - ./docker/postgres/docker-postgresql:/docker-entrypoint-initdb.d
     networks:
-      - app-net
+      - micro-net
 
   pgadmin:
     image: dpage/pgadmin4
@@ -25,6 +25,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=123456
     ports:
       - 9002:80
+    networks:
+      - micro-net
 
   redis:
     image: 'bitnami/redis'
@@ -33,8 +35,8 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=true
     networks:
-      - app-net
+      - micro-net
 
 networks:
-  app-net:
+  micro-net:
     driver: bridge
