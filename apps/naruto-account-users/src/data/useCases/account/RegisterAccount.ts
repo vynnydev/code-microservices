@@ -1,6 +1,7 @@
 import IAliasGenerator from '@data/protocols/utils/aliasGenerator/IAliasGenerator'
 
 import IAccountRepository from "@domain/repositories/account/IAccountRepository"
+import ICacheProvider from '@infra/external/redis/providers/domain/implementations/ICacheProvider'
 
 import IRegisterAccount from "@domain/useCases/account/IRegisterAccount"
 import IRegisterAccountDTO from "@domain/useCases/account/dtos/IRegisterAccountDTO"
@@ -15,7 +16,8 @@ export default class RegisterAccount implements IRegisterAccount {
   constructor(
     private readonly aliasGenerator: IAliasGenerator,
     private readonly hasher: IHasher,
-    private readonly accountRepository: IAccountRepository
+    private readonly accountRepository: IAccountRepository,
+    private readonly cacheProvider: ICacheProvider
   ) {}
 
   public async register({
@@ -45,6 +47,8 @@ export default class RegisterAccount implements IRegisterAccount {
       is_active: true,
       password: hashedPassword,
     })
+
+    await this.cacheProvider.invalidate('accounts')
 
     return right(createdAccount)
   }

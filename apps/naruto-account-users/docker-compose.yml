@@ -1,9 +1,27 @@
 version: '3'
 
 services:
-  # Application
+  api:
+    build:
+      dockerfile: Dockerfile
+    env_file:
+        - .env
+    environment:
+      DATABASE_URL: postgresql://psqldocker:docker@postgres:5432/micro_accounts?schema=public
+    volumes:
+      - .:/usr/src/app
+      - ./usr/src/app/node_modules
+    # Run in dev Mode: npm run dev:server
+    command: npm run dev:server
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - postgres
+
   postgres:
-    image: 'bitnami/postgresql'
+    image: docker/postgres
+    container_name: psqldatabase
     restart: always
     ports:
       - '5432:5432'

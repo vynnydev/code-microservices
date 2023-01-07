@@ -1,10 +1,10 @@
 import env from '@main/config/environment'
 import BcryptAdapter from "@infra/adapters/cryptography/BcryptAdapter"
 
+import Authentication from '@data/useCases/account/Authentication'
 import IAuthentication from "@domain/useCases/account/IAuthentication"
 
 import { makePrismaOrmAccountRepository } from '@main/http/factories/repositories/prisma/account/PrismaOrmAccountRepositoryFactory' 
-import Authentication from '@data/useCases/account/Authentication'
 import { JwtAdapter } from "@infra/adapters/cryptography/JwtAdapter"
 
 export const makeAuthentication = (): IAuthentication => {

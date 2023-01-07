@@ -15,20 +15,17 @@ export class EnsureAuthenticatedMiddleware implements IMiddleware {
   async handle(
     { headers }: IHttpRequest
   ): Promise<IHttpResponse> {
+    const authHeader = headers
+
+    if (!authHeader) return forbidden(new AccessDeniedError())
+
+    const [_, access_token] = authHeader.split(' ');
+
     try {
-      const { access_token } = headers
+      const decoded = decode(access_token) as DecodedJwt
 
-      if (access_token) {
-        try {
-          const decoded = decode(access_token) as DecodedJwt
+      return success({ account_id: decoded.sub })
 
-          return success({ account_id: decoded.sub })
-        } catch (err) {
-          return forbidden(new AccessDeniedError())
-        }
-      }
-
-      return forbidden(new AccessDeniedError())
     } catch (error) {
       return fail(error)
     }

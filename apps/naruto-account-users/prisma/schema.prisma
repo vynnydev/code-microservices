@@ -15,6 +15,11 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
+enum AccountRole {
+  ADMIN
+  DEFAULT_USER
+}
+
 model Account {
   id           String  @id @default(uuid())
   alias_id     String  @unique
@@ -24,6 +29,7 @@ model Account {
   cpf          String  @unique
   phone_number String
   password     String
+  role         AccountRole
   is_active    Boolean
 
   created_at     DateTime        @default(now())
