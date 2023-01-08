@@ -1,3 +1,5 @@
+import { TAccountRole } from '@domain/types/account/TAccountRole'
+
 export default interface IMockAccountModelDTO {
   id?: string,
   alias_id?: string,
@@ -8,6 +10,7 @@ export default interface IMockAccountModelDTO {
   cpf?: string,
   password?: string,
   is_active?: boolean,
+  role?: TAccountRole,
   created_at?: Date,
   updated_at?: Date,
 }

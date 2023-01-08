@@ -8,7 +8,8 @@ import IRegisterAccountDTO from "@domain/useCases/account/dtos/IRegisterAccountD
 import { TRegisterAccountResponse } from '@domain/useCases/account/dtos/TRegisterAccountResponse'
 
 import IHasher from "@data/protocols/cryptography/IHasher"
-
+import { accountRole } from '@domain/types/account/TAccountRole'
+ 
 import { left, right } from '@utils/helpers/Either'
 import { AccountAlreadyExistsError } from '@utils/errors/domain/useCases/AccountAlreadyExistsError'
 
@@ -26,6 +27,7 @@ export default class RegisterAccount implements IRegisterAccount {
     cpf,
     email,
     phone_number,
+    role,
     password
   }: IRegisterAccountDTO): Promise<TRegisterAccountResponse> {
     const generatedAlias = this.aliasGenerator.generate('account')
@@ -45,6 +47,7 @@ export default class RegisterAccount implements IRegisterAccount {
       email,
       phone_number,
       is_active: true,
+      role: accountRole[role],
       password: hashedPassword,
     })
 

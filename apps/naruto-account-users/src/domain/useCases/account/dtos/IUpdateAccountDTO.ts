@@ -1,3 +1,5 @@
+import { TAccountRole } from '@domain/types/account/TAccountRole'
+
 interface IUpdateAccount {
   cpf: string,
   email: string,
@@ -5,6 +7,7 @@ interface IUpdateAccount {
   avatar_url: string,
   phone_number: string,
   password: string,
+  role: TAccountRole,
 }
 
 export default interface IUpdateAccountDTO {

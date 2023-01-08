@@ -12,6 +12,7 @@ export default class AccountMapper {
       password: account.password,
       phone_number: account.phone_number,
       is_active: account.is_active,
+      role: account.role,
       created_at: account.created_at,
       updated_at: account.updated_at,
     };

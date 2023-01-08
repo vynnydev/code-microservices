@@ -1,3 +1,5 @@
+import { TAccountRole } from '@domain/types/account/TAccountRole'
+
 export default class Account {
   id: string;
 
@@ -16,6 +18,8 @@ export default class Account {
   password: string;
 
   is_active: boolean;
+
+  role: TAccountRole;
 
   created_at: Date;
   

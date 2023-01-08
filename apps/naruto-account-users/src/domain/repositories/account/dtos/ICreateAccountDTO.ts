@@ -1,3 +1,5 @@
+import { TAccountRole } from '@domain/types/account/TAccountRole'
+
 export default interface ICreateAccountDTO {
   alias_id: string,
   name: string,
@@ -7,4 +9,5 @@ export default interface ICreateAccountDTO {
   phone_number: string,
   password: string,
   is_active: boolean,
+  role: TAccountRole,
 }

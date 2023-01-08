@@ -4,6 +4,7 @@ import IAccountRepository from "@domain/repositories/account/IAccountRepository"
 import IUpdateAccountDTO from "@domain/useCases/account/dtos/IUpdateAccountDTO";
 import IUpdateAccount from "@domain/useCases/account/IUpdateAccount";
 import { TUpdateAccountResponse } from "@domain/useCases/account/dtos/TUpdateAccountResponse";
+import { TAccountRole } from '@domain/types/account/TAccountRole'
 
 import { InvalidAliasIdOrAccountIsNotActiveError } 
   from "@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError";
@@ -21,11 +22,19 @@ export default class UpdateAccount implements IUpdateAccount {
     if (!foundAccount || !foundAccount.is_active) 
       return left(new InvalidAliasIdOrAccountIsNotActiveError())
 
-    const { name, email, cpf, phone_number, avatar_url, password } = data
+    const { name, email, cpf, phone_number, avatar_url, role, password } = data
 
     const updatedAccount = await this.accountRepository.update({
       id: foundAccount.id,
-      data: { name, email, cpf, avatar_url, phone_number, password }
+      data: { 
+        name, 
+        email, 
+        cpf, 
+        avatar_url, 
+        phone_number,
+        role,
+        password 
+      }
     })
 
     if (!updatedAccount) 
