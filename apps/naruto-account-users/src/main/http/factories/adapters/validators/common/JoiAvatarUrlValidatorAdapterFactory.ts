@@ -1,0 +1,11 @@
+import IAvatarUrlValidator from '@utils/validation/protocols/common/IAvatarUrlValidator';
+
+import JoiAvatarUrlValidatorAdapter from '@infra/adapters/validators/common/joi/AvatarUrlValidatorAdapter';
+
+const makeJoiAvatarUrlValidatorAdapter = (): IAvatarUrlValidator => {
+  const joiAvatarUrlValidatorAdapter = new JoiAvatarUrlValidatorAdapter();
+
+  return joiAvatarUrlValidatorAdapter;
+};
+
+export default { makeJoiAvatarUrlValidatorAdapter };

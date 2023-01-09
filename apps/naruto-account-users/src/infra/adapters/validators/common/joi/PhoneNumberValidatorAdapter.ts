@@ -9,10 +9,11 @@ export default class PhoneNumberValidatorAdapter implements IPhoneNumberValidato
       phone_number: Joi.string().required(),
     });
 
-    const { error } = schema.validate({ phone_number });
+    const region = new PhoneValidator(`+${phone_number}`).getRegionCode();
+    const phoneNumberValidator = new PhoneValidator(phone_number, region);
 
-    if (error) return false;
+    const isValid = phoneNumberValidator.isValid();
 
-    return true;
+    return isValid;
   }
 }

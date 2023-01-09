@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import Account from '@domain/models/account/Account';
-import { accountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
 import IMockAccountModelDTO from '@tests/domain/mocks/dtos/IMockAccountModelDTO';
 
@@ -16,7 +16,7 @@ const mock = (data?: IMockAccountModelDTO): Account => {
     cpf: String(faker.datatype.number()),
     password: String(faker.internet.password()),
     is_active: faker.datatype.boolean(), 
-    role: accountRole[1],
+    role: EAccountRole.ADMIN,
     created_at: faker.date.recent(),
     updated_at: faker.date.recent(),
     ...data,

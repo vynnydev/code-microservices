@@ -1,7 +1,7 @@
 import ValidationComposite from '@utils/validation/validators/ValidationComposite'
 
-import emailValidationFactory from '@main/http/factories/validators/EmailValidationFactory'
-import passwordValidationFactory from '@main/http/factories/validators/PasswordValidationFactory'
+import emailValidationFactory from '@main/http/factories/validators/common/EmailValidationFactory'
+import passwordValidationFactory from '@main/http/factories/validators/common/PasswordValidationFactory'
 
 export const makeLoginValidation = (): ValidationComposite => {
   const emailValidation = emailValidationFactory.makeEmailValidation()

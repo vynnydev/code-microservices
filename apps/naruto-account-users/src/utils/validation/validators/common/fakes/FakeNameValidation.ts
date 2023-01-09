@@ -1,9 +1,14 @@
 import { IValidation } from '@presentation/protocols/IValidation'
 
-export default class FakeNameValidation implements IValidation {
-  private input: any
+import { Either, right } from '@utils/helpers/Either'
 
-  public validate(input: any): void {
+export default class FakeNameValidation<T = any> implements IValidation {
+  private input: T
+
+  public validate(input: T): Either<Error, null> {
     this.input = input
+
+    return right(null)
   }
 }
+
