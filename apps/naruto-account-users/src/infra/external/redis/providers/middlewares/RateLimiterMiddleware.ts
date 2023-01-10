@@ -1,7 +1,6 @@
-import { Request, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { createClient } from 'redis';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
-import { IMiddleware } from '@presentation/protocols/IMiddleware';
 
 import AppError from '@utils/errors/AppError';
 import {
@@ -29,20 +28,17 @@ const limiter = new RateLimiterRedis({
   duration: 1 // por 1 segundo.
 });
 
-export default class RateLimiterMiddleware implements IMiddleware {
-  constructor() {}
+export async function rateLimiterMiddleware(
+  request: Request,
+  response: Response,
+  next: NextFunction 
+): Promise<void> {
+  try {
+    // salvando o ip do consumidor da minha API.
+    await limiter.consume(request.ip);
 
-  public async handle(
-    request: Request,
-    next: NextFunction 
-  ): Promise<void> {
-    try {
-      // salvando o ip do consumidor da minha API.
-      await limiter.consume(request.ip);
-  
-      return next()
-    } catch(error) {
-      throw new AppError({ message: 'Too many request', status_code: 429 })
-    }
+    return next()
+  } catch(error) {
+    throw new AppError({ message: 'Too many request', status_code: 429 })
   }
 }

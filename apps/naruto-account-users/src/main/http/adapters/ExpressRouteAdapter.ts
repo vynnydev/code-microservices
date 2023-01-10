@@ -9,6 +9,7 @@ const adaptRouter = (controller: IController) => {
       headers: request.headers,
       params: request.params,
       query: request.query,
+      id: request.id,
     }
 
     const httpResponse = await controller.handle(requestData)

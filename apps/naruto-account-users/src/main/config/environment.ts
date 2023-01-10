@@ -53,3 +53,8 @@ export const {
   KAFKA_SASL_USERNAME,
   KAFKA_SASL_PASSWORD,
 } = process.env
+
+// ElasticSearch
+export const {
+  ELASTIC_URL
+} = process.env

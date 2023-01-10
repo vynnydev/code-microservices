@@ -18,12 +18,12 @@ export const adaptMiddleware = (middleware: IMiddleware) => {
       return response.status(200).send()
     }
 
-    if (httpResponse.statusCode === 200) {
+    if (httpResponse.status_code === 200) {
       Object.assign(request, httpResponse.body)
 
       return next()
     } else {
-      return response.status(httpResponse.statusCode).json({
+      return response.status(httpResponse.status_code).json({
         error: httpResponse.body.error,
       })
     }

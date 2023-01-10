@@ -7,8 +7,12 @@ import setupMiddlewares from '@main/config/middlewares';
 import setupRoutes from '@main/http/routes' // eslint-disable-line
 import { setupApolloServer } from '@infra/external/graphql/apollo/apollo-server'
 
+import { makeApmServiceProvider } from '@infra/external/observability&metrics/elasticsearch/providers/factories/ApmServiceProviderFactory'
+
 export const setupApp = async (): Promise<Express> => {
   config({ silent: true })
+
+  makeApmServiceProvider().startElasticService()
 
   const app = express()
   
