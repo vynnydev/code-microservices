@@ -1,5 +1,5 @@
-import { InvalidEmailOrPasswordError } from "@utils/errors/domain/useCases/InvalidEmailOrPasswordError"
-import { Either } from "@utils/helpers/Either"
+import { InvalidEmailOrPasswordOrIsNotActiveError } 
+  from "@utils/errors/domain/useCases/InvalidEmailOrPasswordOrIsNotActiveError";import { Either } from "@utils/helpers/Either"
 
 type TokenResponse = {
   token: string
@@ -11,6 +11,6 @@ export type TAuthenticationRequest = {
 }
 
 export type TAuthenticationResponse = Either<
-  InvalidEmailOrPasswordError,
+  InvalidEmailOrPasswordOrIsNotActiveError,
   TokenResponse
 >

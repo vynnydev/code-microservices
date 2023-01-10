@@ -1,9 +1,9 @@
 import { prisma } from '@infra/external/prisma/client'
 
-import IAccountRepository from "@domain/repositories/account/IAccountRepository"
+import IAccountRepository from "@domain/repositories/prisma/account/IAccountRepository"
 import Account from "@domain/models/account/Account"
 
-import IUpdateAccountDTO from '@domain/repositories/account/dtos/IUpdateAccountDTO'
+import IUpdateAccountDTO from '@domain/repositories/prisma/account/dtos/IUpdateAccountDTO'
 
 import accountMapper from '@presentation/mappers/AccountMapper'
 
@@ -16,6 +16,18 @@ export default class PrismaOrmAccountRepository implements IAccountRepository {
     })
 
     return createdAccount
+  }
+
+  async findById(id: string): Promise<Account> {
+    const foundAccount = await prisma.account.findUnique({
+      where: { id }
+    })
+
+    if (!foundAccount) {
+      return null
+    }
+
+    return foundAccount
   }
 
   async findByAliasId(alias_id: string): Promise<Account> {
@@ -48,6 +60,16 @@ export default class PrismaOrmAccountRepository implements IAccountRepository {
     }
 
     return foundAccount
+  }
+
+  async findAccounts(): Promise<Account[]> {
+    const foundAccounts = await prisma.account.findMany({
+      where: {
+        is_active: true
+      }
+    })
+
+    return foundAccounts
   }
 
   async update({ id, data }: IUpdateAccountDTO): Promise<Account> {

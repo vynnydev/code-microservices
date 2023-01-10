@@ -1,14 +1,13 @@
 import IAliasGenerator from '@data/protocols/utils/aliasGenerator/IAliasGenerator'
 
-import IAccountRepository from "@domain/repositories/account/IAccountRepository"
-import ICacheProvider from '@infra/external/redis/providers/domain/implementations/ICacheProvider'
+import IAccountRepository from "@domain/repositories/prisma/account/IAccountRepository"
 
 import IRegisterAccount from "@domain/useCases/account/IRegisterAccount"
 import IRegisterAccountDTO from "@domain/useCases/account/dtos/IRegisterAccountDTO"
 import { TRegisterAccountResponse } from '@domain/useCases/account/dtos/TRegisterAccountResponse'
 
 import IHasher from "@data/protocols/cryptography/IHasher"
-import { accountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
  
 import { left, right } from '@utils/helpers/Either'
 import { AccountAlreadyExistsError } from '@utils/errors/domain/useCases/AccountAlreadyExistsError'
@@ -18,10 +17,9 @@ export default class RegisterAccount implements IRegisterAccount {
     private readonly aliasGenerator: IAliasGenerator,
     private readonly hasher: IHasher,
     private readonly accountRepository: IAccountRepository,
-    private readonly cacheProvider: ICacheProvider
   ) {}
 
-  public async register({
+  async register({
     name,
     avatar_url,
     cpf,
@@ -47,11 +45,9 @@ export default class RegisterAccount implements IRegisterAccount {
       email,
       phone_number,
       is_active: true,
-      role: accountRole[role],
+      role: EAccountRole[role],
       password: hashedPassword,
     })
-
-    await this.cacheProvider.invalidate('accounts')
 
     return right(createdAccount)
   }

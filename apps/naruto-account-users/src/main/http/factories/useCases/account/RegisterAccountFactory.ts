@@ -5,7 +5,6 @@ import IRegisterAccount from "@domain/useCases/account/IRegisterAccount";
 import RegisterAccount from '@data/useCases/account/RegisterAccount'
 
 import { makePrismaOrmAccountRepository } from '@main/http/factories/repositories/prisma/account/PrismaOrmAccountRepositoryFactory' 
-import { makeRedisCacheProvider } from '@infra/external/redis/providers/factories/RedisCacheProviderFactory'
 
 export const makeRegisterAccount = (): IRegisterAccount => {
   const salt = 12
@@ -15,7 +14,6 @@ export const makeRegisterAccount = (): IRegisterAccount => {
     makeAliasGenerator(),
     bcryptAdapter,
     makePrismaOrmAccountRepository(),
-    makeRedisCacheProvider()
   )
 
   return registerAccount

@@ -1,4 +1,4 @@
-import { TAccountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
 export default interface ICreateAccountDTO {
   alias_id: string,
@@ -9,5 +9,5 @@ export default interface ICreateAccountDTO {
   phone_number: string,
   password: string,
   is_active: boolean,
-  role: TAccountRole,
+  role: EAccountRole,
 }

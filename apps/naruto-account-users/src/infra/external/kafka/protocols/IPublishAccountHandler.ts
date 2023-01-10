@@ -1,3 +1,5 @@
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
+
 export type TPublishAccountHandlerRequest = {
   topic: string,
   account: {
@@ -9,6 +11,7 @@ export type TPublishAccountHandlerRequest = {
     cpf: string,
     phone_number: string,
     password: string,
+    role: EAccountRole,
     created_at: Date,
     updated_at: Date,
   }

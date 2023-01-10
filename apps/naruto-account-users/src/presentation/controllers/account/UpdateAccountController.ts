@@ -30,6 +30,7 @@ export default class UpdateAccountController implements IController {
         email, 
         cpf, 
         phone_number, 
+        role,
         password 
       } = body 
 
@@ -41,6 +42,7 @@ export default class UpdateAccountController implements IController {
           email, 
           cpf, 
           phone_number, 
+          role,
           password 
         }
       })
@@ -66,6 +68,7 @@ export default class UpdateAccountController implements IController {
             cpf: updatedAccount.value.cpf,
             phone_number: updatedAccount.value.phone_number,
             password: updatedAccount.value.password,
+            role: updatedAccount.value.role,
             created_at: updatedAccount.value.created_at,
             updated_at: updatedAccount.value.updated_at,
           }

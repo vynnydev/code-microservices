@@ -10,6 +10,17 @@ export default {
   jwtSecret: process.env.JWT_SECRET || 'tj67O==5H'
 }
 
+export const EXPIRATION_TIME = 3600
+export const PREFIX_ACCOUNT_CACHE = 'accountAliasId:';
+export const UPDATED_ACCOUNT_CACHE_PREFIX = 'updatedAccountAliasId:'
+export const DEACTIVATED_ACCOUNT_CACHE_PREFIX = 'deactivatedAccountAliasId:'
+export const BLACKLIST_ACCOUNT_CACHE_PREFIX = 'backlistAccountToken:'
+
+export const logger = {
+  enabled: true,
+  level: 'info'
+}
+
 // App
 export const {
   NODE_ENV,

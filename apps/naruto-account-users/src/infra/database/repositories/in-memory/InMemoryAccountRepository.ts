@@ -1,8 +1,8 @@
 import Account from '@domain/models/account/Account'
-import IAccountRepository from '@domain/repositories/account/IAccountRepository'
+import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository'
 
-import ICreateAccountDTO from '@domain/repositories/account/dtos/ICreateAccountDTO'
-import IUpdateAccountDTO from '@domain/repositories/account/dtos/IUpdateAccountDTO'
+import ICreateAccountDTO from '@domain/repositories/prisma/account/dtos/ICreateAccountDTO'
+import IUpdateAccountDTO from '@domain/repositories/prisma/account/dtos/IUpdateAccountDTO'
 
 export class InMemoryAccountRepository implements IAccountRepository {
   constructor(public items: Account[] = []) {}
@@ -15,6 +15,7 @@ export class InMemoryAccountRepository implements IAccountRepository {
     email,
     password,
     is_active,
+    role,
     phone_number,
   }: ICreateAccountDTO): Promise<Account> {
     const createAccount = {
@@ -27,6 +28,7 @@ export class InMemoryAccountRepository implements IAccountRepository {
       password,
       phone_number,
       is_active,
+      role,
       created_at: new Date(),
       updated_at: new Date(),
     };
@@ -34,6 +36,10 @@ export class InMemoryAccountRepository implements IAccountRepository {
     this.items.push(createAccount)
 
     return createAccount
+  }
+
+  async findById(id: string): Promise<Account> {
+    return this.items.find(account => account.id === id)
   }
 
   async findByAliasId(alias_id: string): Promise<Account> {
@@ -46,6 +52,10 @@ export class InMemoryAccountRepository implements IAccountRepository {
 
   async findByEmail(email: string): Promise<Account> {
     return this.items.find(account => account.email === email)
+  }
+
+  async findAccounts(): Promise<Account[]> {
+    return this.items
   }
 
   async update({ id, data }: IUpdateAccountDTO): Promise<Account> {

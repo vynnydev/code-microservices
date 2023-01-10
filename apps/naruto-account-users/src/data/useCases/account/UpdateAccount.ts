@@ -1,17 +1,22 @@
 import AppError from "@utils/errors/AppError";
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
-import IAccountRepository from "@domain/repositories/account/IAccountRepository";
-import IUpdateAccountDTO from "@domain/useCases/account/dtos/IUpdateAccountDTO";
+import IAccountRepository from "@domain/repositories/prisma/account/IAccountRepository";
+import IAccountCacheProviderRepository from "@domain/repositories/redis/account/IAccountCacheProviderRepository";
+
 import IUpdateAccount from "@domain/useCases/account/IUpdateAccount";
+import IUpdateAccountDTO from "@domain/useCases/account/dtos/IUpdateAccountDTO";
 import { TUpdateAccountResponse } from "@domain/useCases/account/dtos/TUpdateAccountResponse";
-import { TAccountRole } from '@domain/types/account/TAccountRole'
 
 import { InvalidAliasIdOrAccountIsNotActiveError } 
   from "@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError";
 import { left, right } from "@utils/helpers/Either";
 
 export default class UpdateAccount implements IUpdateAccount {
-  constructor(private readonly accountRepository: IAccountRepository) {}
+  constructor(
+    private readonly accountRepository: IAccountRepository,
+    private readonly accountCacheProviderRepository: IAccountCacheProviderRepository
+  ) {}
 
   async update({
     data,
@@ -32,10 +37,12 @@ export default class UpdateAccount implements IUpdateAccount {
         cpf, 
         avatar_url, 
         phone_number,
-        role,
+        role: EAccountRole[role],
         password 
       }
     })
+
+    await this.accountCacheProviderRepository.updateAccount(foundAccount)
 
     if (!updatedAccount) 
       throw new AppError({ message: 'Could not update account', status_code: 400 })

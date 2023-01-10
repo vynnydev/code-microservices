@@ -4,7 +4,8 @@ import { IValidation } from "@presentation/protocols/IValidation"
 import IAuthentication from "@domain/useCases/account/IAuthentication"
 
 import { clientError, forbidden, IHttpRequest, IHttpResponse, success } from "@presentation/protocols/IHttp"
-import { InvalidEmailOrPasswordError } from "@utils/errors/domain/useCases/InvalidEmailOrPasswordError"
+import { InvalidEmailOrPasswordOrIsNotActiveError } 
+  from "@utils/errors/domain/useCases/InvalidEmailOrPasswordOrIsNotActiveError"
 
 export default class LoginController implements IController {
   constructor(
@@ -29,7 +30,7 @@ export default class LoginController implements IController {
         const error = auth.value
         
         switch (error.constructor) {
-          case InvalidEmailOrPasswordError:
+          case InvalidEmailOrPasswordOrIsNotActiveError:
             return forbidden(error)
           default: 
             return clientError(error)

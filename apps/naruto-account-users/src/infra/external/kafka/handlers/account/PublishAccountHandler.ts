@@ -16,6 +16,7 @@ export default class PublishAccountHandler implements IPublishAccountHandler {
         cpf: account.cpf,
         phone_number: account.phone_number,
         password: account.password,
+        role: account.role,
         created_at: account.created_at,
         updated_at: account.updated_at,
       }

@@ -1,4 +1,4 @@
-import { EErrorType } from '@domain/enums/error/EErrorType';
+import { EErrorType } from './EErrorType';
 
 interface IErrorConstructor {
   message: string;

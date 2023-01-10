@@ -1,4 +1,4 @@
-import { TAccountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
 interface IUpdateAccount {
   name?: string,
@@ -8,7 +8,7 @@ interface IUpdateAccount {
   password?: string,
   avatar_url?: string,
   is_active?: boolean,
-  role?: TAccountRole,
+  role?: EAccountRole,
 }
 
 export default interface IUpdateAccountDTO {

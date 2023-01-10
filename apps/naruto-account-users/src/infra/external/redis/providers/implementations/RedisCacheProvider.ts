@@ -1,11 +1,17 @@
 import { redisClient } from '@infra/external/redis/config/client'
 
 import ICacheProvider from '@infra/external/redis/providers/domain/implementations/ICacheProvider'
-import ICacheProviderDTO from '@infra/external/redis/providers/dtos/ICacheProviderDTO'
+
+import ISaveCacheProviderDTO from '@infra/external/redis/providers/dtos/ISaveCacheProviderDTO'
+import ISetCacheProviderDTO from '@infra/external/redis/providers/dtos/ISetCacheProviderDTO'
 
 export default class RedisCacheProvider implements ICacheProvider {
-  public async save({ key, value }: ICacheProviderDTO): Promise<void> {
+  public async save({ key, value }: ISaveCacheProviderDTO): Promise<void> {
     await redisClient.set(key, JSON.stringify(value))
+  }
+
+  public async setCache({ key, seconds }: ISetCacheProviderDTO): Promise<void> {
+    await redisClient.set(key, 1, 'EX', seconds)
   }
 
   public async recovery<T>(key: string): Promise<T | null> {
@@ -25,9 +31,9 @@ export default class RedisCacheProvider implements ICacheProvider {
   }
 
   public async invalidatePrefix(prefix: string): Promise<void> {
-    // deletar todos as key que foi passado o prefix.
+    // deletar todos as keys que foram passadas o prefix.
     // a variável "keys", vai armazenar todos as keys que foi encontrada pelo prefixo.
-    const keys = await redisClient.keys(`{prefix}:*`)
+    const keys = await redisClient.keys(`${prefix}:*`)
 
     // deletando as keys.
     // iniciando um pipeline no redis.

@@ -1,4 +1,4 @@
-import { TAccountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
 export default class Account {
   id: string;
@@ -19,7 +19,7 @@ export default class Account {
 
   is_active: boolean;
 
-  role: TAccountRole;
+  role: EAccountRole;
 
   created_at: Date;
   

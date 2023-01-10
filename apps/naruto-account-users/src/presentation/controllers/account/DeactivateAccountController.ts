@@ -42,6 +42,7 @@ export default class DeactivateAccountController implements IController {
             cpf: deactivatedAccount.value.cpf,
             phone_number: deactivatedAccount.value.phone_number,
             password: deactivatedAccount.value.password,
+            role: deactivatedAccount.value.role,
             created_at: deactivatedAccount.value.created_at,
             updated_at: deactivatedAccount.value.updated_at,
           }

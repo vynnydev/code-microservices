@@ -28,6 +28,7 @@ export default class SignUpController implements IController {
         email, 
         cpf, 
         phone_number, 
+        role,
         password 
       } = body
   
@@ -37,6 +38,7 @@ export default class SignUpController implements IController {
         email, 
         cpf, 
         phone_number, 
+        role,
         password 
       })
   
@@ -61,6 +63,7 @@ export default class SignUpController implements IController {
             cpf: createdAccount.value.cpf,
             phone_number: createdAccount.value.phone_number,
             password: createdAccount.value.password,
+            role: createdAccount.value.role,
             created_at: createdAccount.value.created_at,
             updated_at: createdAccount.value.updated_at,
           }

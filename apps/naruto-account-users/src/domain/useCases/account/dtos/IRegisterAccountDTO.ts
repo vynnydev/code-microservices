@@ -1,4 +1,4 @@
-import { TAccountRole } from '@domain/types/account/TAccountRole'
+import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
 export default interface IRegisterAccountDTO {
   name: string,
@@ -7,5 +7,5 @@ export default interface IRegisterAccountDTO {
   cpf: string, 
   phone_number: string, 
   password: string,
-  role: TAccountRole,
+  role: EAccountRole,
 }

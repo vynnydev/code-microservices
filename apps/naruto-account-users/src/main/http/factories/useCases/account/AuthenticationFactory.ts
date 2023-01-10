@@ -5,6 +5,8 @@ import Authentication from '@data/useCases/account/Authentication'
 import IAuthentication from "@domain/useCases/account/IAuthentication"
 
 import { makePrismaOrmAccountRepository } from '@main/http/factories/repositories/prisma/account/PrismaOrmAccountRepositoryFactory' 
+import { makeAccountCacheProviderRepository } from '@main/http/factories/repositories/redis/cache/account/AccountCacheProviderRepositoryFactory'
+
 import { JwtAdapter } from "@infra/adapters/cryptography/JwtAdapter"
 
 export const makeAuthentication = (): IAuthentication => {
@@ -16,7 +18,8 @@ export const makeAuthentication = (): IAuthentication => {
   const authenticateAccount = new Authentication(
     bcryptAdapter,
     jwtAdapter,
-    makePrismaOrmAccountRepository()
+    makePrismaOrmAccountRepository(),
+    makeAccountCacheProviderRepository()
   )
 
   return authenticateAccount

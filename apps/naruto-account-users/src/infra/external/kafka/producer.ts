@@ -1,5 +1,6 @@
 import { config } from 'dotenv-flow'
 import { kafka } from "./client"
+import logger from '@infra/external/logger/pino/logger'
 
 config({ silent: true })
 
@@ -8,5 +9,5 @@ export const producer = kafka.producer({
 })
 
 producer.connect().then(() => {
-  console.log('[Accounts] Kafka producer connected');
+  logger.info('[Accounts] Kafka producer connected');
 })
