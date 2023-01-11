@@ -1,15 +1,15 @@
-import IAuthentication from '@domain/useCases/account/IAuthentication';
-import IAuthenticationDTO from '@domain/useCases/account/dtos/IAuthenticationDTO';
+import IAuthentication from '@domain/useCases/account/IAuthentication'
+import IAuthenticationDTO from '@domain/useCases/account/dtos/IAuthenticationDTO'
 
-import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository';
-import IHashComparer from '@data/protocols/cryptography/IHashComparer';
-import ISignEncrypter from '@data/protocols/cryptography/ISignEncrypter';
+import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository'
+import IHashComparer from '@data/protocols/cryptography/IHashComparer'
+import ISignEncrypter from '@data/protocols/cryptography/ISignEncrypter'
 import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository'
 
-import { left, right } from '@utils/helpers/Either';
-import { TAuthenticationResponse } from '@domain/useCases/account/dtos/TAuthenticationResponse';
+import { left, right } from '@utils/helpers/Either'
+import { TAuthenticationResponse } from '@domain/useCases/account/dtos/TAuthenticationResponse'
 import { InvalidEmailOrPasswordOrIsNotActiveError } 
-  from '@utils/errors/domain/useCases/InvalidEmailOrPasswordOrIsNotActiveError';
+  from '@utils/errors/domain/useCases/InvalidEmailOrPasswordOrIsNotActiveError'
 import { InvalidPasswordError } from '@utils/errors/domain/useCases/InvalidPasswordError'
 
 export default class Authentication implements IAuthentication {

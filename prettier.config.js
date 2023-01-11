@@ -1,5 +1,7 @@
 module.exports = {
+  semi: false,
   singleQuote: true,
   arrowParens: 'avoid',
-  semi: false,
+  trailingComa: 'es2020',
+  endOfLine: 'auto'
 }

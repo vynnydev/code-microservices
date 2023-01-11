@@ -1,14 +1,14 @@
-import AppError from '@utils/errors/AppError';
+import AppError from '@utils/errors/AppError'
 
-import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository';
-import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository';
+import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository'
+import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository'
 
-import IDeactivateAccount from '@domain/useCases/account/IDeactivateAccount';
-import { TDeactivateAccountResponse } from '@domain/useCases/account/dtos/TDeactivateAccountResponse';
+import IDeactivateAccount from '@domain/useCases/account/IDeactivateAccount'
+import { TDeactivateAccountResponse } from '@domain/useCases/account/dtos/TDeactivateAccountResponse'
 
 import { InvalidAliasIdOrAccountIsNotActiveError } 
-  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError';
-import { left, right } from '@utils/helpers/Either';
+  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError'
+import { left, right } from '@utils/helpers/Either'
 
 export default class DeactivateAccount implements IDeactivateAccount {
   constructor(

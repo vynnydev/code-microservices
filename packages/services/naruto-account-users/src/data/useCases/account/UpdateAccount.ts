@@ -1,16 +1,16 @@
-import AppError from '@utils/errors/AppError';
+import AppError from '@utils/errors/AppError'
 import { EAccountRole } from '@domain/enums/account/EAccountRole'
 
-import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository';
-import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository';
+import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository'
+import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository'
 
-import IUpdateAccount from '@domain/useCases/account/IUpdateAccount';
-import IUpdateAccountDTO from '@domain/useCases/account/dtos/IUpdateAccountDTO';
-import { TUpdateAccountResponse } from '@domain/useCases/account/dtos/TUpdateAccountResponse';
+import IUpdateAccount from '@domain/useCases/account/IUpdateAccount'
+import IUpdateAccountDTO from '@domain/useCases/account/dtos/IUpdateAccountDTO'
+import { TUpdateAccountResponse } from '@domain/useCases/account/dtos/TUpdateAccountResponse'
 
 import { InvalidAliasIdOrAccountIsNotActiveError } 
-  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError';
-import { left, right } from '@utils/helpers/Either';
+  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError'
+import { left, right } from '@utils/helpers/Either'
 
 export default class UpdateAccount implements IUpdateAccount {
   constructor(

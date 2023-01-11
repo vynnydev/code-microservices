@@ -1,8 +1,8 @@
-import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository';
-import IFindAccounts from '@domain/useCases/account/IFindAccounts';
-import { TFindAccountsResponse } from '@domain/useCases/account/dtos/TFindAccountsResponse';
+import IAccountRepository from '@domain/repositories/prisma/account/IAccountRepository'
+import IFindAccounts from '@domain/useCases/account/IFindAccounts'
+import { TFindAccountsResponse } from '@domain/useCases/account/dtos/TFindAccountsResponse'
 
-import { right } from '@utils/helpers/Either';
+import { right } from '@utils/helpers/Either'
 
 export default class FindAccounts implements IFindAccounts {
   constructor(private readonly accountRepository: IAccountRepository) {}

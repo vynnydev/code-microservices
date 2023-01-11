@@ -1,4 +1,4 @@
-import mockAccountModel from '@tests/domain/mocks/MockAccountModel';
+import mockAccountModel from '@tests/domain/mocks/MockAccountModel'
 
 import IRegisterAccount from '@domain/useCases/account/IRegisterAccount'
 import IRegisterAccountDTO from '@domain/useCases/account/dtos/IRegisterAccountDTO'
@@ -8,8 +8,8 @@ import { right } from '@utils/helpers/Either'
 
 export default class FakeRegisterAccount implements IRegisterAccount {
   public async register(data: IRegisterAccountDTO): Promise<TRegisterAccountResponse> {
-    const account = mockAccountModel.mock();
+    const account = mockAccountModel.mock()
 
-    return right(account);
+    return right(account)
   }
 }

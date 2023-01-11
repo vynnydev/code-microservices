@@ -1,11 +1,11 @@
 import IAccountCacheProviderRepository from '@domain/repositories/redis/account/IAccountCacheProviderRepository'
 
-import IFindAccountByEmail from '@domain/useCases/account/IFindAccount';
-import { TFindAccountResponse } from '@domain/useCases/account/dtos/TFindAccountResponse';
+import IFindAccountByEmail from '@domain/useCases/account/IFindAccount'
+import { TFindAccountResponse } from '@domain/useCases/account/dtos/TFindAccountResponse'
 
 import { InvalidAliasIdOrAccountIsNotActiveError } 
-  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError';
-import { left, right } from '@utils/helpers/Either';
+  from '@utils/errors/domain/useCases/InvalidAliasIdOrAccountIsNotActiveError'
+import { left, right } from '@utils/helpers/Either'
 
 export default class FindAccount implements IFindAccountByEmail {
   constructor(private readonly accountCacheProviderRepository: IAccountCacheProviderRepository) {}

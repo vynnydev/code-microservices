@@ -1,4 +1,4 @@
-import Account from '@domain/models/account/Account';
+import Account from '@domain/models/account/Account'
 
 export default interface IAccountCacheProviderRepository {
   auth(account: Account): Promise<void>
