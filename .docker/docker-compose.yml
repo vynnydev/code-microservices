@@ -1,0 +1,41 @@
+version: '3'
+
+services: 
+  postgres:
+    build: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=psqldocker:dbaccounts,postgres:dbsenders
+      - POSTGRES_PASSWORD=docker
+    volumes:
+      - ./postgres/dbdata:/var/lib/postgresql/data
+      - ./postgres/docker-postgresql:/docker-entrypoint-initdb.d
+    networks:
+      - micro-net
+
+  redis:
+    image: 'bitnami/redis'
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - micro-net
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@user.com
+      - PGADMIN_DEFAULT_PASSWORD=123456
+    ports:
+      - 9002:80
+    networks:
+      - micro-net
+
+networks:
+  micro-net:
+    driver: bridge

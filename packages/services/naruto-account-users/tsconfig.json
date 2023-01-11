@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "target": "es2022",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es2020", "esnext.asynciterable"],
+    "paths": {
+      "@data/*":["./src/data/*"],
+      "@domain/*":["./src/domain/*"],
+      "@infra/*":["./src/infra/*"],
+      "@main/*":["./src/main/*"],
+      "@presentation/*":["./src/presentation/*"],
+      "@utils/*":["./src/utils/*"],
+      "@tests/*": ["./src/tests/*"] 
+    }
+  }
+}
