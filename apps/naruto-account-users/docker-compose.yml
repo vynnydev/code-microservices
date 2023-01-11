@@ -20,17 +20,16 @@ services:
       - postgres
 
   postgres:
-    image: docker/postgres
-    container_name: psqldatabase
+    build: docker/postgres
     restart: always
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=docker:micro_accounts,docker:dbtest
+      - POSTGRESQL_USERNAME=psqldocker
       - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=micro_accounts
     volumes:
       - ./docker/dbdata:/var/lib/postgresql/data
-      - ./docker/postgres/docker-postgresql:/docker-entrypoint-initdb.d
     networks:
       - micro-net
 

@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "make:usecase": "plop --plopfile ./.plop/usecase.ts",
     "build": "babel src --extensions \".ts\" --out-dir dist --copy-files",
-    "check": "npm-check -s -u"
+    "sonar:scanner": "sonar-scanner"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -94,6 +94,7 @@
     "prettier": "2.4.1",
     "prisma": "^4.7.1",
     "prisma-erd-generator": "^1.2.4",
+    "sonarqube-scanner": "^3.0.0",
     "supertest": "6.1.6",
     "ts-jest": "27.0.7",
     "ts-node-dev": "1.1.8",

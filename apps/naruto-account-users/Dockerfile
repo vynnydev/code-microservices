@@ -2,19 +2,19 @@ FROM node:lts-alpine AS devDependencies
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY ./src ./src
-RUN npm run install --production=false --frozen-lockfile
+RUN yarn install --production=false --frozen-lockfile
 
 FROM node:lts-alpine AS dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY ./src ./src
-RUN npm run install --production=true --frozen-lockfile
+RUN yarn install --production=true --frozen-lockfile
 
 FROM node:lts-alpine AS build
 WORKDIR /app
 COPY --from=devDependencies /app/ .
 COPY . .
-RUN npm run build
+RUN yarn build
 
 FROM node:lts-alpine AS runtime
 USER node
