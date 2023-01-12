@@ -1,6 +1,6 @@
-import IRegisterAccountDTO from './dtos/IRegisterAccountDTO';
-import { TRegisterAccountResponse } from './dtos/TRegisterAccountResponse';
+import IRegisterAccountDTO from './dtos/IRegisterAccountDTO'
+import { TRegisterAccountResponse } from './dtos/TRegisterAccountResponse'
 
 export default interface IRegisterAccount {
-  register(data: IRegisterAccountDTO): Promise<TRegisterAccountResponse>;
+  register(data: IRegisterAccountDTO): Promise<TRegisterAccountResponse>
 }

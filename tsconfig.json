@@ -21,6 +21,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "lib": ["es2020", "esnext.asynciterable"],
+    "typeRoots" : ["./node_modules/@types", "./src/@types"],
   },
   "include": [
     "packages/**/**/*"

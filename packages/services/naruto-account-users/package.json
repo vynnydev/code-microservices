@@ -1,5 +1,5 @@
 {
-  "name": "@services/naruto-account-users",
+  "name": "@monorepo/naruto",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
